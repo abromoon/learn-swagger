@@ -1,4 +1,4 @@
-class GamePublishersController < ApplicationController
+class Api::GamePublishersController < Api::AuthController
   before_action :set_game_publisher, only: %i[ show update destroy ]
 
   # GET /game_publishers
@@ -18,7 +18,7 @@ class GamePublishersController < ApplicationController
     @game_publisher = GamePublisher.new(game_publisher_params)
 
     if @game_publisher.save
-      render json: @game_publisher, status: :created, location: @game_publisher
+      render json: @game_publisher, status: :created, location: [:api, @game_publisher]
     else
       render json: @game_publisher.errors, status: :unprocessable_entity
     end

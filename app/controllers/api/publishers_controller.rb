@@ -1,4 +1,4 @@
-class PublishersController < ApplicationController
+class Api::PublishersController < Api::AuthController
   before_action :set_publisher, only: %i[ show update destroy ]
 
   # GET /publishers
@@ -18,7 +18,7 @@ class PublishersController < ApplicationController
     @publisher = Publisher.new(publisher_params)
 
     if @publisher.save
-      render json: @publisher, status: :created, location: @publisher
+      render json: @publisher, status: :created, location: [:api, @publisher]
     else
       render json: @publisher.errors, status: :unprocessable_entity
     end

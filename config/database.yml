@@ -42,7 +42,7 @@ development:
   port: 5432
 
   # Schema search path. The server defaults to $user,public
-  schema_search_path: "may,rest_api_development,video_games"
+  schema_search_path: "video_games"
 
   # Minimum log levels, in increasing order:
   #   debug5, debug4, debug3, debug2, debug1,

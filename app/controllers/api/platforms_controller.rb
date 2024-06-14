@@ -1,4 +1,4 @@
-class PlatformsController < ApplicationController
+class Api::PlatformsController < Api::AuthController
   before_action :set_platform, only: %i[ show update destroy ]
 
   # GET /platforms
@@ -18,7 +18,7 @@ class PlatformsController < ApplicationController
     @platform = Platform.new(platform_params)
 
     if @platform.save
-      render json: @platform, status: :created, location: @platform
+      render json: @platform, status: :created, location: [:api, @platform]
     else
       render json: @platform.errors, status: :unprocessable_entity
     end

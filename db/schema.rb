@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_14_204956) do
   create_schema "video_games"
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_tokens", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_api_tokens_on_user_id"
+  end
 
   create_table "game", id: :integer, default: nil, force: :cascade do |t|
     t.integer "genre_id"
@@ -54,6 +62,14 @@ ActiveRecord::Schema[7.1].define(version: 0) do
     t.decimal "num_sales", precision: 5, scale: 2
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "api_tokens", "users"
   add_foreign_key "game", "genre", name: "fk_gm_gen"
   add_foreign_key "game_platform", "game_publisher", name: "fk_gpl_gp"
   add_foreign_key "game_platform", "platform", name: "fk_gpl_pla"

@@ -1,4 +1,4 @@
-class GamesController < ApplicationController
+class Api::GamesController < Api::AuthController
   before_action :set_game, only: %i[ show update destroy ]
 
   # GET /games
@@ -18,7 +18,7 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
 
     if @game.save
-      render json: @game, status: :created, location: @game
+      render json: @game, status: :created, location: [:api, @game]
     else
       render json: @game.errors, status: :unprocessable_entity
     end

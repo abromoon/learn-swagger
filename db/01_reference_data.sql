@@ -1,9 +1,6 @@
-DROP SCHEMA IF EXISTS video_games CASCADE;
-DROP SCHEMA IF EXISTS public CASCADE;
+-- DROP SCHEMA IF EXISTS video_games CASCADE;
 
-
-CREATE SCHEMA public;
-CREATE SCHEMA video_games;
+-- CREATE SCHEMA video_games;
 
 DROP TABLE IF EXISTS video_games.genre;
 

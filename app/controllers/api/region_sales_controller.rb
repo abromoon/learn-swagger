@@ -1,4 +1,4 @@
-class RegionSalesController < ApplicationController
+class Api::RegionSalesController < Api::AuthController
   before_action :set_region_sale, only: %i[ show update destroy ]
 
   # GET /region_sales
@@ -18,7 +18,7 @@ class RegionSalesController < ApplicationController
     @region_sale = RegionSale.new(region_sale_params)
 
     if @region_sale.save
-      render json: @region_sale, status: :created, location: @region_sale
+      render json: @region_sale, status: :created, location: [:api, @region_sale]
     else
       render json: @region_sale.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class RegionSalesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def region_sale_params
-      params.require(:region_sale).permit(:region_id, :GamePlatform_id, :num_sales)
+      params.require(:region_sale).permit(:region_id, :game_platform_id, :num_sales)
     end
 end

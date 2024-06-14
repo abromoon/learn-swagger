@@ -1,4 +1,4 @@
-class GamePlatformsController < ApplicationController
+class Api::GamePlatformsController < Api::AuthController
   before_action :set_game_platform, only: %i[ show update destroy ]
 
   # GET /game_platforms
@@ -16,9 +16,9 @@ class GamePlatformsController < ApplicationController
   # POST /game_platforms
   def create
     @game_platform = GamePlatform.new(game_platform_params)
-
+    
     if @game_platform.save
-      render json: @game_platform, status: :created, location: @game_platform
+      render json: @game_platform, status: :created, location: [:api, @game_platform]
     else
       render json: @game_platform.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class GamePlatformsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def game_platform_params
-      params.require(:game_platform).permit(:GamePublisher_id, :Platform_id, :release_year)
+      params.require(:game_platform).permit(:game_publisher_id, :platform_id, :release_year)
     end
 end

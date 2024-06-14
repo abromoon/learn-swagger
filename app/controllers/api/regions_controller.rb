@@ -1,4 +1,4 @@
-class RegionsController < ApplicationController
+class Api::RegionsController < Api::AuthController
   before_action :set_region, only: %i[ show update destroy ]
 
   # GET /regions
@@ -18,7 +18,7 @@ class RegionsController < ApplicationController
     @region = Region.new(region_params)
 
     if @region.save
-      render json: @region, status: :created, location: @region
+      render json: @region, status: :created, location: [:api, @region]
     else
       render json: @region.errors, status: :unprocessable_entity
     end

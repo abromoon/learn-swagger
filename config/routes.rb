@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # mount Rswag::Api::Engine => '/api-docs'
   
   namespace :api do
+    post 'auth/login', to: "auth#login"
+
     resources :game_platforms
     resources :region_sales
     resources :game_publishers

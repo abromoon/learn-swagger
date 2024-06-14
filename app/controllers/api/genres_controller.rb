@@ -1,4 +1,4 @@
-class GenresController < ApplicationController
+class Api::GenresController < Api::AuthController
   before_action :set_genre, only: %i[ show update destroy ]
 
   # GET /genres
@@ -18,7 +18,7 @@ class GenresController < ApplicationController
     @genre = Genre.new(genre_params)
 
     if @genre.save
-      render json: @genre, status: :created, location: @genre
+      render json: @genre, status: :created, location: [:api, @genre]
     else
       render json: @genre.errors, status: :unprocessable_entity
     end
